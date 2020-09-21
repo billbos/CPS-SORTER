@@ -4,11 +4,10 @@ import tempfile
 from shutil import copyfile
 import os
 
-DEFAULT_PREDICTION_JAR = 'C:/workspace/MasterThesis/scripts/jars/makePrediction.jar'
-DEFAULT_PREDICTION_BULK_JAR = 'C:/workspace/MasterThesis/scripts/jars/makeBatchPrediction.jar'
-DEFAULT_MODEL_BUILDING_JAR = 'C:/workspace/MasterThesis/scripts/jars/train_models.jar'
-DEFAULT_MODEL_EVALUATOR_JAR = 'C:/workspace/MasterThesis/scripts/jars/ModelEvaluator.jar'
-
+DEFAULT_PREDICTION_JAR = '{}/jars/makePrediction.jar'.format(os.path.dirname(os.path.realpath(__file__)))
+DEFAULT_PREDICTION_BULK_JAR = '{}/jars/makeBatchPrediction.jar'.format(os.path.dirname(os.path.realpath(__file__)))
+DEFAULT_MODEL_BUILDING_JAR ='{}/jars/train_models.jar'.format(os.path.dirname(os.path.realpath(__file__)))
+DEFAULT_MODEL_EVALUATOR_JAR = '{}/jars/ModelEvaluator.jar'.format(os.path.dirname(os.path.realpath(__file__)))
 class WekaHelper:
     def __init__(self, prediction_jar=DEFAULT_PREDICTION_JAR, model_building_jar=DEFAULT_MODEL_BUILDING_JAR, temp_dir=None, model_evaluator_jar=DEFAULT_MODEL_EVALUATOR_JAR):
         self.prediction_jar = prediction_jar

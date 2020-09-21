@@ -242,12 +242,21 @@ def split_data(safe_dir, unsafe_dir, out_dir, train_test_ratio, unsafe_ratio):
     len_safe = len(safe_files)
     num_unsafe_sample = int(unsafe_ratio * total_sum)
     num_safe_sample = int((1-unsafe_ratio)*total_sum)
-    if num_safe_sample > len(safe_files):
-        num_safe_sample  = len(safe_files)
+
+    if num_safe_sample > len_safe:
+        num_safe_sample  = len_safe
         num_unsafe_sample = int(num_safe_sample / (1-unsafe_ratio) * unsafe_ratio)
+        if num_unsafe_sample > len_unsafe:
+            num_unsafe_sample = len_unsafe
+            num_safe_sample = int(len_safe / unsafe_ratio * (1-unsafe_ratio))
+
     if num_unsafe_sample > len(unsafe_files):
-        num_unsafe_sample = len(unsafe_sample)
+        num_unsafe_sample = len_unsafe
         num_safe_sample  = int(num_unsafe_sample / unsafe_ratio * (1-unsafe_ratio))
+        if num_safe_sample > len_safe:
+            num_safe_sample = len_safe
+            num_unsafe_sample = int(len_safe /  (1-unsafe_ratio) * unsafe_ratio)
+
     safe_test = random.sample(safe_files,num_safe_sample)
     unsafe_test = random.sample(unsafe_files,num_unsafe_sample)
     test_set = safe_test + unsafe_test

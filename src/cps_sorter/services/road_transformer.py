@@ -7,7 +7,29 @@ import json
 import os
 from asfault.tests import RoadTest
 import random
+from scipy.spatial.distance import directed_hausdorff
 
+
+class Point:
+    def __init__(self,x_init,y_init):
+        self.x = x_init
+        self.y = y_init
+
+    def shift(self, x, y):
+        self.x += x
+        self.y += y
+
+    def __repr__(self):
+        return "".join(["Point(", str(self.x), ",", str(self.y), ")"])
+
+    def __eq__(self, other):
+        if (self.x == other.x) and (self.y == other.y):
+            return True
+        else:
+            return False
+
+    def __ne__(self, other):
+        return not self.__eq__(other)
 class RoadTransformer:
 
     label_map = {
@@ -18,6 +40,9 @@ class RoadTransformer:
         0: 'unsafe',
         1: 'safe'
     }
+
+    def get_distance(self, point_a, point_b):
+        return np.sqrt( ((point_a.x-point_b.x)**2)+((point_a.y-point_b.y)**2))
 
     def convert_to_test(self, test, is_file=False, exclude_features=[]):
         to_test = tempfile.NamedTemporaryFile(delete=False)
@@ -337,3 +362,105 @@ class RoadTransformer:
         # pandas2arff(balanced_set, test_balanced_path_arff, cleanstringdata=True, cleannan=True)
 
         return training_path
+
+    def extract_segment_features_rows(self, data):
+            rows = []
+            num_oobs = data['execution']['oobs']
+            path = data['path']
+            stop_at_last_oob = True
+            if data['execution']['reason'] == 'goal_reached':
+                stop_at_last_oob = False
+
+            for i in range(0, len(path)):
+            
+                row = {
+                    'is_start_seg': 0,
+                    'is_last_seg': 0,
+                }
+                seg_id = path[i]
+                seg = data['network']['nodes'][str(seg_id)]
+                prev_seg = next_seg = None
+                if i == 0:
+                    row['is_start_seg'] = 1
+                else:
+                    prev_seg = data['network']['nodes'][str(path[i-1])]
+                if i == len(path)-1:
+                    row['is_last_seg'] = 1
+                else:
+                    next_seg = data['network']['nodes'][str(path[i+1])]
+                row.update(self.segment_to_feature(seg, prev_seg, next_seg))
+                if seg['key'] in data['execution']['seg_oob_count'].keys(): #fix is seg in oob
+                    row['safety'] = 'unsafe'
+                    num_oobs += -1
+                else:
+                    row['safety'] = 'safe'
+                rows.append(row)
+                if num_oobs == 0 and stop_at_last_oob:
+                    break
+            return rows
+    def segment_to_feature(self,segment, prev_seg={}, next_seg={}):
+        prev_seg_feature = next_seg_feature = {}
+        seg_l_lane =  np.array([(p[0], p[1]) for p in segment['l_lanes'][0]['l_edge']])
+        if prev_seg:
+            prev_seg_feature = self.segment_extract_feature(prev_seg, 'prev')
+            prev_l_lane = np.array([(p[0], p[1]) for p in prev_seg['l_lanes'][0]['l_edge']])
+            prev_seg_feature['prev_directed_hausdorff'] = directed_hausdorff(seg_l_lane, prev_l_lane)[0]
+
+        else:
+            prev_seg_feature = {
+            'prev_angles': -1,
+            'prev_is_right_turn': 0,
+            'prev_is_left_turn': 0,
+            'prev_is_straight': 0,
+            'prev_pivot_off': -1,
+            'prev_actual_length': -1,
+            'prev_direct_length': -1,
+            'prev_directed_hausdorff': -1
+        }
+        if next_seg:
+            next_seg_feature = self.segment_extract_feature(next_seg, 'next')
+            next_seg_l_lane =  np.array([(p[0], p[1]) for p in next_seg['l_lanes'][0]['l_edge']])
+            next_seg_feature['next_directed_hausdorff'] = directed_hausdorff(seg_l_lane, next_seg_l_lane)[0]
+
+
+        else:
+            next_seg_feature = {
+            'next_angles': -1,
+            'next_is_right_turn': 0,
+            'next_is_left_turn': 0,
+            'next_is_straight': 0,
+            'next_pivot_off': -1,
+            'next_actual_length': -1,
+            'next_direct_length': -1,
+            'next_directed_hausdorff': -1
+
+        }
+        seg_feature = self.segment_extract_feature(segment, 'seg')
+        result = {**seg_feature, **prev_seg_feature, **next_seg_feature}
+        return result
+
+    def segment_extract_feature(self, segment, prefix):
+        l_lane = [Point(p[0], p[1]) for p in segment['l_lanes'][0]['l_edge']]
+        r_lane = [Point(point[0], point[1]) for point in segment['r_lanes'][0]['r_edge']]
+
+        l_lane_distance = sum([self.get_distance(x,y) for x,y in zip(l_lane[:-1], l_lane[1:])]) 
+        r_lane_distance = sum([self.get_distance(x,y) for x,y in zip(r_lane[:-1], r_lane[1:])])
+        direct_distance = (self.get_distance(l_lane[0], l_lane[-1]) + self.get_distance(r_lane[0], r_lane[-1])) / 2
+        is_right_turn = is_left_turn = is_straight = 0
+        if segment['roadtype'] == 'l_turn':
+            is_left_turn = 1
+        elif segment['roadtype'] == 'r_turn':
+            is_right_turn = 1
+        elif segment['roadtype'] == 'straight':
+            is_straight = 1
+
+        segment_feature = {
+            '{}_angles'.format(prefix): segment['angle'],
+            '{}_is_right_turn'.format(prefix): is_right_turn,
+            '{}_is_left_turn'.format(prefix): is_left_turn,
+            '{}_is_straight'.format(prefix): is_straight,
+            '{}_pivot_off'.format(prefix): segment['pivot_off'],
+            '{}_actual_length'.format(prefix): (r_lane_distance+l_lane_distance)/2,
+            '{}_direct_length'.format(prefix): direct_distance
+        }
+        return segment_feature
