@@ -1,0 +1,3 @@
+[submodule "AsFault"]
+	path = AsFault
+	url = https://github.com/alessiogambi/AsFault.git

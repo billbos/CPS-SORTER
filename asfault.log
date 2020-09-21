@@ -1,0 +1,21 @@
+2020-09-21 11:18:03,688 INFO     Started the logging framework writing to file: asfault.log
+2020-09-21 11:18:03,690 INFO     Starting with environment from: C:\Users\bboss\.asfaultenv
+2020-09-21 11:18:03,719 ERROR    Uncaught exception:
+Traceback (most recent call last):
+  File "C:\workspace\CPS-SORTER\venv\Scripts\cps_sorter-script.py", line 33, in <module>
+    sys.exit(load_entry_point('cps-sorter', 'console_scripts', 'cps_sorter')())
+  File "c:\workspace\cps-sorter\venv\lib\site-packages\click\core.py", line 829, in __call__
+    return self.main(*args, **kwargs)
+  File "c:\workspace\cps-sorter\venv\lib\site-packages\click\core.py", line 782, in main
+    rv = self.invoke(ctx)
+  File "c:\workspace\cps-sorter\venv\lib\site-packages\click\core.py", line 1259, in invoke
+    return _process_result(sub_ctx.command.invoke(sub_ctx))
+  File "c:\workspace\cps-sorter\venv\lib\site-packages\click\core.py", line 1066, in invoke
+    return ctx.invoke(self.callback, **ctx.params)
+  File "c:\workspace\cps-sorter\venv\lib\site-packages\click\core.py", line 610, in invoke
+    return callback(*args, **kwargs)
+  File "c:\workspace\cps-sorter\src\cps_sorter\cli.py", line 107, in run_real_time_eval
+    result = test_generator.run_experiment(time_budget=int(time_budget), weka_model='Logistic.model', bulk_size=20, init_data=init_data, adaptive=adaptive)
+  File "c:\workspace\cps-sorter\src\cps_sorter\services\real_time_experiments.py", line 78, in run_experiment
+    test_factory = RoadTestFactory(config.ev.bounds)
+NameError: name 'RoadTestFactory' is not defined
