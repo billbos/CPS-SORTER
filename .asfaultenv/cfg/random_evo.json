@@ -1,0 +1,21 @@
+{
+    "restart_search": true,
+    "bounds": 500,
+    "estimator": "lanedist",
+    "evaluator": "lanedist",
+    "intro_chance": 0.0,
+    "join_probability": 0.0,
+    "l_lanes": 1,
+    "lane_width": 4.0,
+    "max_angle": 5.0,
+    "mut_chance": 0.0,
+    "partial_merge_d_count": 1,
+    "partial_merge_m_count": 1,
+    "pop_size": 1,
+    "r_lanes": 1,
+    "selector": "tournament",
+    "try_all_ops": false,
+    "search_stopper": "stop_at_obe",
+    "attempt_repair": false,
+    "pop_merger" : "replace_with_random"
+    }

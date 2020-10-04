@@ -43,12 +43,11 @@ def run_model_eval(datasetname, input_dir, featureset, output_dir):
 
 
 @cli.command()
-@click.option('-d','--dataset', 'dataset', default='dataset')
 @click.option('-i','--input_dir', 'input_dir' )
 @click.option('-o','--output_dir', 'output_dir', default=DEFAULT_OUTPUT)
-@click.option('-r','--rounds', 'rounds')
-@click.option('-rt','--ratio', 'ratio')
-def run_round_based_eval(dataset, input_dir, output_dir, rounds, ratio):
+@click.option('-r','--rounds', 'rounds', default=30)
+@click.option('-q','--ratio', 'ratio', default=0.5)
+def run_round_based_eval(input_dir, output_dir, rounds, ratio):
     road_transformer = RoadTransformer()
     rounds = int(rounds)
     with tempfile.TemporaryDirectory() as temp_dir:
@@ -109,5 +108,4 @@ def run_real_time_eval(init_data, output_dir, time_budget, adaptive):
  
 
 if __name__ == '__main__':
-    init_data = 'C:/workspace/MasterThesis/complete_training.csv'
     cli()

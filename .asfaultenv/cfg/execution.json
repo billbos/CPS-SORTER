@@ -1,0 +1,17 @@
+{
+    "ai_controlled": "true",
+    "beamng_dir": "C:\\Users\\bboss\\Documents\\BeamNG.research",
+    "direction_agnostic_boundary": false,
+    "env_count": 1,
+    "failure_timeout_spm": 0.25,
+    "goal_distance": 10,
+    "host": "localhost",
+    "level_dir": "levels\\asfault",
+    "max_speed": "true",
+    "min_speed": 2,
+    "navi_graph": "false",
+    "port": 32512,
+    "risk": 1.5,
+    "standstill_threshold": 120,
+    "waypoint_step": 75.0
+}

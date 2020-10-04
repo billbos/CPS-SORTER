@@ -2,3 +2,4 @@ src/cps_sorter/__pycache__/
 src/cps_sorter.egg-info/
 *.pyc
 venv/
+.eggs/

@@ -19,3 +19,92 @@ Traceback (most recent call last):
   File "c:\workspace\cps-sorter\src\cps_sorter\services\real_time_experiments.py", line 78, in run_experiment
     test_factory = RoadTestFactory(config.ev.bounds)
 NameError: name 'RoadTestFactory' is not defined
+2020-09-21 11:59:30,879 INFO     Started the logging framework writing to file: asfault.log
+2020-09-21 11:59:30,881 INFO     Starting with environment from: C:\Users\bboss\.asfaultenv
+2020-09-21 11:59:56,254 INFO     Generate new random individual: 1
+2020-09-21 11:59:56,263 INFO     Executing Test#1 in BeamNG.drive.
+2020-09-21 11:59:56,278 INFO     This execution is allowed to run until: 2020-09-21T12:06:08.054526
+2020-09-21 11:59:56,279 WARNING  SETTING UP TESTS: ['asfault-tig.prefab', 'asfault.json', 'asfault.lua', 'asfault.prefab']
+2020-09-21 12:00:28,646 ERROR    Error running test Test#1
+2020-09-21 12:00:28,647 ERROR    timed out
+Traceback (most recent call last):
+  File "c:\workspace\cps-sorter\src\cps_sorter\services\real_time_experiments.py", line 282, in run_test
+    execution = runner.run()
+  File "c:\workspace\cps-sorter\asfault\src\asfault\beamer.py", line 1015, in run
+    accepted = self.accept_client(timeout=30)
+  File "c:\workspace\cps-sorter\asfault\src\asfault\beamer.py", line 705, in accept_client
+    con, addr = self.server.accept()
+  File "C:\Users\bboss\AppData\Local\Programs\Python\Python36-32\lib\socket.py", line 205, in accept
+    fd, addr = self._accept()
+socket.timeout: timed out
+2020-09-21 12:00:58,734 INFO     Executing Test#1 in BeamNG.drive.
+2020-09-21 12:00:58,734 INFO     This execution is allowed to run until: 2020-09-21T12:07:10.521061
+2020-09-21 12:00:58,735 WARNING  SETTING UP TESTS: ['asfault-tig.prefab', 'asfault.json', 'asfault.lua', 'asfault.prefab']
+2020-09-21 13:41:57,623 INFO     Started the logging framework writing to file: asfault.log
+2020-09-21 13:41:57,624 INFO     Starting with environment from: C:\Users\bboss\.asfaultenv
+2020-09-21 13:42:23,061 INFO     Generate new random individual: 1
+2020-09-21 13:42:23,074 INFO     Executing Test#1 in BeamNG.drive.
+2020-09-21 13:42:23,089 INFO     This execution is allowed to run until: 2020-09-21T13:48:48.021544
+2020-09-21 13:42:23,090 WARNING  SETTING UP TESTS: ['asfault-tig.prefab', 'asfault.json', 'asfault.lua', 'asfault.prefab']
+2020-09-21 15:12:43,815 INFO     Started the logging framework writing to file: asfault.log
+2020-09-21 15:12:43,817 INFO     Starting with environment from: C:\Users\bboss\.asfaultenv
+2020-09-21 15:13:11,217 INFO     Generate new random individual: 1
+2020-09-21 15:13:11,603 WARNING  Cannot generate any random test. Retry
+2020-09-21 15:13:12,324 INFO     Generate new random individual: 2
+2020-09-21 15:13:14,332 INFO     Generate new random individual: 3
+2020-09-21 15:13:15,220 INFO     Generate new random individual: 4
+2020-09-21 15:13:17,329 INFO     Generate new random individual: 5
+2020-09-21 15:13:17,598 WARNING  Cannot generate any random test. Retry
+2020-09-21 15:13:17,777 INFO     Generate new random individual: 6
+2020-09-21 15:13:19,966 WARNING  Cannot generate any random test. Retry
+2020-09-21 15:13:20,449 WARNING  Cannot generate any random test. Retry
+2020-09-21 15:13:21,015 INFO     Generate new random individual: 7
+2020-09-21 15:13:21,174 INFO     Generate new random individual: 8
+2020-09-21 15:13:23,150 INFO     Generate new random individual: 9
+2020-09-21 15:13:23,798 INFO     Generate new random individual: 10
+2020-09-21 15:13:26,077 INFO     Generate new random individual: 11
+2020-09-21 15:13:26,550 INFO     Generate new random individual: 12
+2020-09-21 15:13:28,429 INFO     Generate new random individual: 13
+2020-09-21 15:13:28,495 WARNING  Cannot generate any random test. Retry
+2020-09-21 15:13:28,652 INFO     Generate new random individual: 14
+2020-09-21 15:13:30,388 INFO     Generate new random individual: 15
+2020-09-21 15:13:30,515 INFO     Generate new random individual: 16
+2020-09-21 15:13:32,500 INFO     Generate new random individual: 17
+2020-09-21 15:13:32,980 WARNING  Cannot generate any random test. Retry
+2020-09-21 15:13:33,400 WARNING  Cannot generate any random test. Retry
+2020-09-21 15:13:33,674 INFO     Generate new random individual: 18
+2020-09-21 15:13:35,544 INFO     Generate new random individual: 19
+2020-09-21 15:13:35,645 INFO     Generate new random individual: 20
+2020-09-21 15:13:38,049 INFO     Generate new random individual: 21
+2020-09-21 15:13:39,732 INFO     Generate new random individual: 22
+2020-09-21 15:13:41,631 INFO     Generate new random individual: 23
+2020-09-21 15:13:41,939 INFO     Generate new random individual: 24
+2020-09-21 15:13:44,839 INFO     Generate new random individual: 25
+2020-09-21 15:13:45,118 INFO     Generate new random individual: 26
+2020-09-21 15:13:47,397 INFO     Generate new random individual: 27
+2020-09-21 15:13:47,779 WARNING  Cannot generate any random test. Retry
+2020-09-21 15:13:48,372 WARNING  Cannot generate any random test. Retry
+2020-09-21 15:13:48,707 INFO     Generate new random individual: 28
+2020-09-21 15:13:51,557 INFO     Generate new random individual: 29
+2020-09-21 15:13:51,944 INFO     Generate new random individual: 30
+2020-09-21 15:15:25,296 INFO     Started the logging framework writing to file: asfault.log
+2020-09-21 15:15:25,298 INFO     Starting with environment from: C:\Users\bboss\.asfaultenv
+2020-09-21 15:15:55,767 INFO     Generate new random individual: 1
+2020-09-21 15:15:56,563 INFO     Generate new random individual: 2
+2020-09-21 15:15:59,401 INFO     Executing Test#2 in BeamNG.drive.
+2020-09-21 15:15:59,418 INFO     This execution is allowed to run until: 2020-09-21T15:22:37.222958
+2020-09-21 15:15:59,515 WARNING  SETTING UP TESTS: ['asfault-tig.prefab', 'asfault.json', 'asfault.lua', 'asfault.prefab']
+2020-09-21 15:17:54,870 INFO     Started the logging framework writing to file: asfault.log
+2020-09-21 15:17:54,872 INFO     Starting with environment from: C:\Users\bboss\.asfaultenv
+2020-09-21 15:18:22,077 INFO     Generate new random individual: 1
+2020-09-21 15:18:22,586 INFO     Generate new random individual: 2
+2020-09-21 15:18:24,322 INFO     Executing Test#1 in BeamNG.drive.
+2020-09-21 15:18:24,336 INFO     This execution is allowed to run until: 2020-09-21T15:23:24.955586
+2020-09-21 15:18:24,346 WARNING  SETTING UP TESTS: ['asfault-tig.prefab', 'asfault.json', 'asfault.lua', 'asfault.prefab']
+2020-09-21 15:19:16,653 INFO     Started the logging framework writing to file: asfault.log
+2020-09-21 15:19:16,658 INFO     Starting with environment from: C:\Users\bboss\.asfaultenv
+2020-09-21 15:19:44,833 INFO     Generate new random individual: 1
+2020-09-21 15:19:46,212 INFO     Generate new random individual: 2
+2020-09-21 15:19:48,416 INFO     Executing Test#1 in BeamNG.drive.
+2020-09-21 15:19:48,428 INFO     This execution is allowed to run until: 2020-09-21T15:26:27.298115
+2020-09-21 15:19:48,435 WARNING  SETTING UP TESTS: ['asfault-tig.prefab', 'asfault.json', 'asfault.lua', 'asfault.prefab']
